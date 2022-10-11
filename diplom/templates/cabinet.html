@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block menu_header %} 
+<p>{{ object.l_name }} menu</p> xnj xthn djpmvb ghjbc[jlbn]
+{% endblock %}
+
+{% block menu_content %}
+
+<a onclick="hideDivFunc(1)" href="#" class="menu"> Messages </a>
+<a onclick="hideDivFunc(2)" href="#" class="menu"> Closed tasks </a>
+
+{% endblock %}
+
+{% block cabin_menu_content %}
+<a onclick="showDivFunc('settings')" href="#" class="menu">Close task</a>
+{% endblock %}
+
+
+{% block page_content %}
+
+
+<div class="main-visible" id="1">                      
+
+    <br>
+<div class="infoblock-visible">
+
+
+
+    <br><h6>Hello, {{ object.title }} {{ object.f_name }} {{ object.patronymic }} {{ object.l_name }}, here is your working cabinet.</h6><br>
+    Your current task is: {% for t in task_name %}{{ t.task_name }} {% endfor %} on construction site №{% for c in construction_site %}  {{ c.construction_site_number }} {% endfor %}<br>
+    Deadline is: {% for d in deadline %}  {{ d.task_deadline }} {% endfor %}<br>
+
+
+</div></div>
+
+    </div></div>
+
+{% endblock %}
+
+
+
+

@@ -1,0 +1,8 @@
+{% load webpush_notifications %}
+<h2>Log In</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+
+  <button type="submit">Log In</button>
+</form>  {% webpush_button with_class="menu" %}

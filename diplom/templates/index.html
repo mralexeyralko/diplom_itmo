@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+
+{% block menu_header %} 
+Employees 
+{% endblock %}
+
+
+{% block menu_content %}
+{% for emp in employees %}
+<a onclick="hideDivFunc({{ emp.t_number }})" href="#" class="menu">{{ emp.title }} {{ emp.f_name }} {{ emp.l_name }}</a>
+{% endfor %}
+{% endblock %}
+
+{% block cabin_menu_content %}
+<a onclick="showDivFunc('settings')" href="#" class="menu">Enter new employee</a>
+{% endblock %}
+
+
+{% block page_content %}
+
+
+<div class="settings" id="settings"> 
+    <div class="settingsInner">
+            
+
+            <div class="closeBox">
+                <div class="menu">            
+                    <a onclick="showDivFunc('settings')" href="#" class="menu"> x </a>
+                </div>
+            </div><br>
+
+        Enter new employee.<br>
+        <div class="formsBackground">
+            <div class="innerformsBackground">
+                <form name="new_employee" action="/submit/" method="post">
+
+                    Title: 
+                    <select id="title" type="text" name="title">
+                        {% for title in titles %}
+                        <option value="{{ title.title }}">{{ title.title }} </option>
+                        {% endfor %}
+                    </select><br>
+
+                    First name: 
+                    <input id="f_name" type="text" name="f_name"></input><br>
+                    Patronymic: 
+                    <input id="patronymic" type="text" name="patronymic"></input><br>
+                    Last name: 
+                    <input id="l_name" type="text" name="l_name"></input><br>
+
+
+
+                    Cabinet number:
+                    <select id="cabin_number" type="number" name="cabin_number">
+                        {% for cabinet in cabinets %}
+                        <option value="{{ cabinet.cabin_number }}">{{ cabinet.cabin_number }} </option>
+                        {% endfor %}
+                    </select><br>
+
+
+
+                    Work since: <input id="work_since" type="text" name="work_since" placeholder="YYYY-MM-DD"></input><br>
+
+                    Lead employee: 
+                    <select id="lead_employee_value" type="text" name="lead_employee_value">
+                        {% for lead_employ in lead_employee %}
+                        <option value="{{ lead_employ.lead_employee_value }}">{{ lead_employ.lead_employee_value }} </option>
+                        {% endfor %}
+                    </select><br>
+
+                    Rating: 
+                    <input id="rating" type="text" name="rating" placeholder="1-5"></input><br>
+
+                    Position: 
+                    <select id="employee_position_name" type="text" name="employee_position_name">
+                        {% for pos in position %}
+                        <option value="{{ pos.employee_position_name }}">{{ pos.employee_position_name }} </option>
+                        {% endfor %}
+                    </select><br>
+
+
+                    Department:
+                    <select id="department_name" type="text" name="department_name">
+                        {% for dep in department %}
+                        <option value="{{ dep.department_name }}">{{ dep.department_name }} </option>
+                        {% endfor %}
+                    </select><br>
+
+                    Slug: 
+                    <input id="slug" type="text" name="slug" placeholder="some_text_for_address"></input><br>
+
+                    {% csrf_token %}
+                    {{ form }}
+                    <!-- <input type="submit" value="Submit"> -->
+                    <input class="menu" name="new_employee" value="Submit" type="submit">
+                    <br>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+{% for empl in employees %}
+<div class="main" id="{{ empl.t_number }}">                      
+
+        <br>
+    <div class="infoblock">
+        <div class="icon_menu">
+            <img src="/static/img/{{ empl.t_number }}.png" width="120" height="160">
+            <a href="#" >View tasks closed</a>
+            <a href="#" >Send message</a>
+            <a href="#" >Rate</a>
+        </div>
+
+
+        <h6>{{ empl.title }} {{ empl.f_name }} {{ empl.patronymic }} {{ empl.l_name }}</h6><br>
+        Table number: {{ empl.t_number }} <br>
+        Rating: {{ empl.rating }}<br>
+        Position: {{ empl.employee_position_name }}<br>
+        Department: {{ empl.department_name }}<br>
+        Cabin number: {{ empl.cabin_number }}<br>
+        Led employee: {{ empl.lead_employee_value }}<br>
+        Work since: {{ empl.work_since }}<br>
+        Cabinet URL: employees/{{ empl.slug }}<br>
+
+    </div></div>
+{% endfor %}
+{% endblock %}
+
+
+
+

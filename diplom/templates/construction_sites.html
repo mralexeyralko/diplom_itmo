@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+
+{% block menu_header %} 
+Construction sites 
+{% endblock %}
+
+
+{% block menu_content %}
+{% for c in construction_site %}
+<a onclick="hideDivFunc({{ c.construction_site_number }})" href="#" class="menu">Construction site №{{ c.construction_site_number }}</a>
+{% endfor %}
+{% endblock %}
+
+{% block cabin_menu_content %}
+<a onclick="showDivFunc('settings')" href="#" class="menu">Create new construction site</a>
+{% endblock %}
+
+
+{% block page_content %}
+
+
+<div class="settings" id="settings"> 
+    <div class="settingsInner">
+            <div class="closeBox">
+                <div class="menu">            
+                    <a onclick="showDivFunc('settings')" href="#" class="menu"> x </a>
+                </div>
+            </div><br>
+
+        Enter new employee.<br>
+        <div class="formsBackground">
+            <div class="innerformsBackground">
+                <form name="new_employee" action="/submit/" method="post">
+
+                    Title: 
+                    <select id="title" type="text" name="title">
+                        {% for title in titles %}
+                        <option value="{{ title.title }}">{{ title.title }} </option>
+                        {% endfor %}
+                    </select><br>
+
+                    First name: 
+                    <input id="f_name" type="text" name="f_name"></input><br>
+                    Patronymic: 
+                    <input id="patronymic" type="text" name="patronymic"></input><br>
+                    Last name: 
+                    <input id="l_name" type="text" name="l_name"></input><br>
+
+
+
+                    Cabinet number:
+                    <select id="cabin_number" type="number" name="cabin_number">
+                        {% for cabinet in cabinets %}
+                        <option value="{{ cabinet.cabin_number }}">{{ cabinet.cabin_number }} </option>
+                        {% endfor %}
+                    </select><br>
+
+
+
+                    Work since: <input id="work_since" type="text" name="work_since" placeholder="YYYY-MM-DD"></input><br>
+
+                    Lead employee: 
+                    <select id="lead_employee_value" type="text" name="lead_employee_value">
+                        {% for lead_employ in lead_employee %}
+                        <option value="{{ lead_employ.lead_employee_value }}">{{ lead_employ.lead_employee_value }} </option>
+                        {% endfor %}
+                    </select><br>
+
+                    Rating: 
+                    <input id="rating" type="text" name="rating" placeholder="1-5"></input><br>
+
+                    Position: 
+                    <select id="employee_position_name" type="text" name="employee_position_name">
+                        {% for pos in position %}
+                        <option value="{{ pos.employee_position_name }}">{{ pos.employee_position_name }} </option>
+                        {% endfor %}
+                    </select><br>
+
+
+                    Department:
+                    <select id="department_name" type="text" name="department_name">
+                        {% for dep in department %}
+                        <option value="{{ dep.department_name }}">{{ dep.department_name }} </option>
+                        {% endfor %}
+                    </select><br>
+
+                    Slug: 
+                    <input id="slug" type="text" name="slug" placeholder="some_text_for_address"></input><br>
+
+                    {% csrf_token %}
+                    {{ form }}
+
+                    <input class="menu" name="new_employee" value="Submit" type="submit">
+                    <br>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+{% for c in construction_site %}
+<div class="main" id="{{ c.construction_site_number }}">                      
+<br>
+    <div class="infoblock">
+        <h6>Construction site №{{ c.construction_site_number }} "{{ c.construction_site_name }}"</h6><br>
+
+Cabinet lead employee:<br>
+{% for e in employees %} 
+{% if c.cabin_number == e.cabin_number %}
+{% if c.lead_employee == e.t_number %}
+
+{{ e.title }} {{ e.f_name }} {{ e.patronymic }} {{ e.l_name }} <br>
+{% endif %}
+{% endif %}
+{% endfor %}
+<br>
+Cabinet employees:<br>
+{% for e in employees %} 
+{% if c.cabin_number == e.cabin_number %}
+{{ e.title }} {{ e.f_name }} {{ e.patronymic }} {{ e.l_name }} <br>
+{% endif %}
+{% endfor %}
+    </div></div>
+{% endfor %}
+
+{% endblock %}
+
+
+{% for source in sources %}
+   <table>
+      <tr>
+          <td>{{ source }}</td>
+          <td>
+              {% if title == source %}
+                Just now! 
+              {% endif %}
+          </td>
+      </tr>
+   </table>
+{% endfor %}
+

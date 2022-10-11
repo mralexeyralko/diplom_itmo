@@ -1,0 +1,56 @@
+{% load static %}
+{% load webpush_notifications %}
+<!DOCTYPE html>
+
+    <head><title></title>
+    {% webpush_header %}
+    <link rel="stylesheet" href="{% static '/CSS/stylesheet.css' %}">
+    
+    </head>
+
+        <body style="font-family:Tahoma;color:#000000; margin:3px; padding:0">
+
+            
+
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+            <script src="{% static 'JavaScript/script.js' %}"></script>
+
+            <div class="horizontal_menu">
+                <a href="../employees/" class="horizontal_menu">Employees</a>
+                <a href="../cabinets/" class="horizontal_menu">Cabinets</a>
+                <a href="../construction_sites/" class="horizontal_menu">Construction sites</a>
+                <a href="../tasks/" class="menu">Tasks</a>
+                <a href="#" class="horizontal_menu">Statistics</a>
+            </div>
+            <div class="header">
+                <p class="header-text">
+              Build n Ride LLC.</p>
+              <p class="header-small-text">
+             "We build, You do whatever you want"  </p>             
+            </div>
+
+            <div class="middle"> 
+                    <div class="right">
+                        <div class="menu">
+                            <div class="inside-block">{% block menu_header %} {% endblock %}
+                                 
+                            </div>
+                            {% block menu_content %} {% endblock %}
+                            </div>
+                        
+
+                            
+                        <div class="menu">
+
+                            {% block cabin_menu_content %} {% endblock %}
+                            </div>
+                        </div>
+                            {% block page_content %} {% endblock %}
+
+            </div>
+
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </body>
+</html>

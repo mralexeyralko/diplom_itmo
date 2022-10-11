@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+
+{% block menu_header %} 
+Tasks
+{% endblock %}
+
+
+{% block menu_content %}
+
+<a onclick="hideDivFunc('1')" href="#" class="menu">All tasks</a>
+<a onclick="hideDivFunc('2')" href="#" class="menu">Closed tasks</a>
+<a onclick="hideDivFunc('3')" href="#" class="menu">Active tasks</a>
+
+{% endblock %}
+
+{% block cabin_menu_content %}
+<a onclick="showDivFunc('settings')" href="#" class="menu">Define new task</a>
+{% endblock %}
+
+
+{% block page_content %}
+
+
+<div class="settings" id="settings"> 
+    <div class="settingsInner">
+            
+
+            <div class="closeBox">
+                <div class="menu">            
+                    <a onclick="showDivFunc('settings')" href="#" class="menu"> x </a>
+                </div>
+            </div><br>
+
+        Define new task.<br>
+        <div class="formsBackground">
+            <div class="innerformsBackground">
+                <form name="new_task" action="/submit/" method="post">
+
+                    Task name:
+                    <select id="task_name" type="text" name="task_name">
+                        {% for c in construction_operations %}
+                        <option value="{{ c.construction_operation_name }}"> {{ c.construction_operation_name }} </option>
+                        {% endfor %}
+                    </select><br>
+
+                    Employees name: 
+                    <select id="t_number" type="text" name="t_number">
+                        {% for e in employees %}
+                        <option value="{{ e.t_number }}"> {{ e.title }} {{ e.f_name }} {{ e.patronymic }} {{ e.l_name }} </option>
+                        {% endfor %}
+                    </select><br>
+
+                    Construction site name:
+                    <select id="construction_site_number" type="number" name="construction_site_number">
+                        {% for construction in construction_site %}
+                        <option value="{{ construction.construction_site_number }}"> {{ construction.construction_site_name }} </option>
+                        {% endfor %}
+                    </select><br>
+
+                    Cabinet number:
+                    <select id="cabin_number" type="number" name="cabin_number">
+                        {% for cabinet in cabinets %}
+                        <option value="{{ cabinet.cabin_number }}">{{ cabinet.cabin_number }} </option>
+                        {% endfor %}
+                    </select><br>
+
+                    Task deadline: 
+                    <input id="task_dealine" type="text" name="task_deadline" placeholder="1900-01-01 00:00:00"></input><br>
+
+
+              
+                    {% csrf_token %}
+                    {{ form }}
+                    <input class="menu" name="new_task" value="Submit" type="submit">
+                    <br>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+
+<div class="main" id="1">                      
+
+        <br>
+    <div class="infoblock">
+        <center><table border="1px" color="red">
+            
+  
+<tr> <td> # </td><td>task name</td><td> employee table number </td> <td> cabinet number </td> <td> task dedaline </td></tr>
+{% for t in tasks2 %}<tr> <td> {{ t.task_number }} </td><td>{{ t.task_name_id }}</td><td> {{ t.t_number_id }} </td> <td> {{ t.cabin_number_id }} </td> <td>{{ t.task_deadline }}</td></tr>{% endfor %}
+
+        </table> </center>
+<br>
+
+
+        
+
+
+    </div></div>
+
+{% endblock %}
+
+
+
+
