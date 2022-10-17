@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-oxk&*mrn2h=du@1-wru$(@p6mdka$bb2@%mi4typ+52^5a0gs%'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -86,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'diplom_db',
         'USER': 'root',
-        'PASSWORD': '69C9O8$o',
+        'PASSWORD': '***',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
